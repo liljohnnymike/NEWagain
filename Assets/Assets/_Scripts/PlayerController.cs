@@ -11,16 +11,14 @@ public class PlayerController : MonoBehaviour {
         CombatState,
     }
 
-
     States CurrentState;
 
     private Rigidbody RB;
     public Animator Anim;
     public float MovementSpeed = 100;
-    //public float Sprint = 200;
-    //public float OriginalMovementSpeed = 100;
 
 
+    public GameObject Camera;
     public Vector3 IP; // Movement Input
 
     float DT;
@@ -38,19 +36,32 @@ public class PlayerController : MonoBehaviour {
         IP.z = Input.GetAxisRaw("Vertical");
       }
 
-    public void MovementInput(float DeltaTime, Vector3 MoveInput)
+
+    //Movement Input...
+    public void MovementInput(float DeltaTime, Vector3 MoveInput, Transform DirTrans)
     {
         if (RB != null)
         {
-            //RB.AddForce(MoveInput * MovementSpeed * DeltaTime);
-            float StoredYVelocity = RB.velocity.y;
-            Vector3 NewVelocity = MoveInput * MovementSpeed * DeltaTime;
-            Vector3 Vel = new Vector3(NewVelocity.x, StoredYVelocity, NewVelocity.z);
-            RB.velocity = Vel;
+
+            Vector3 Forward = DirTrans.forward * MoveInput.z;
+            Forward.y = 0;
+            Forward.Normalize();
+
+            Vector3 Right = DirTrans.right * MoveInput.x;
+
+            RB.AddForce(Forward * MovementSpeed * DT);
+            RB.AddForce(Right * MovementSpeed * DT);
+
+            ////RB.AddForce(MoveInput * MovementSpeed * DeltaTime);
+            //float StoredYVelocity = RB.velocity.y;
+            //Vector3 NewVelocity = MoveInput * MovementSpeed * DeltaTime;
+            //Vector3 Vel = new Vector3(NewVelocity.x, StoredYVelocity, NewVelocity.z);
+            //RB.velocity = Vel;
         }
        
     }
 
+    //Animation...
     public void updateAnim(Animator AnimationController)
     {
         if (AnimationController != null)
@@ -62,6 +73,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 
+    //Combat States...
     public void dodoOutOfCombat()
     {
         if(RB.velocity.magnitude != 0)
@@ -71,7 +83,7 @@ public class PlayerController : MonoBehaviour {
     }
     public void doOutOfCombat()
     {
-        MovementInput(DT, IP);
+        MovementInput(DT, IP, Camera.transform);
     }
     public void doCombat()
     {
