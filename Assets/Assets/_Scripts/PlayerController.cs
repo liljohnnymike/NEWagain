@@ -36,8 +36,7 @@ public class PlayerController : MonoBehaviour {
     {
         IP.x = Input.GetAxisRaw("Horizontal");
         IP.z = Input.GetAxisRaw("Vertical");
-       // Sprint = Input.GetKey("space");
-    }
+      }
 
     public void MovementInput(float DeltaTime, Vector3 MoveInput)
     {
@@ -49,11 +48,7 @@ public class PlayerController : MonoBehaviour {
             Vector3 Vel = new Vector3(NewVelocity.x, StoredYVelocity, NewVelocity.z);
             RB.velocity = Vel;
         }
-        if (Input.GetKeyDown("space"))
-        {
-            MovementSpeed = MovementSpeed * 2;
-        }
-    
+       
     }
 
     public void updateAnim(Animator AnimationController)
