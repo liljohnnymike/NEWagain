@@ -16,12 +16,18 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody RB;
     public Animator Anim;
     public float MovementSpeed = 100;
+    public float SmoothDamp = 10;
 
+    public Camera cam;
 
-    public GameObject Camera;
     public Vector3 IP; // Movement Input
 
     float DT;
+
+    public GameObject bullet;
+    private float AttackDelay = 0.8f;
+    public float SetAttackDelay;
+    public bool attacking;
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +40,7 @@ public class PlayerController : MonoBehaviour {
     {
         IP.x = Input.GetAxisRaw("Horizontal");
         IP.z = Input.GetAxisRaw("Vertical");
+        attacking = Input.GetMouseButton(0);
       }
 
 
@@ -43,7 +50,7 @@ public class PlayerController : MonoBehaviour {
         if (RB != null)
         {
 
-            Vector3 Forward = DirTrans.forward * MoveInput.z;
+            Vector3 Forward = DirTrans.forward * MoveInput.z; //Transform forward multiplied by our Vertical Input...
             Forward.y = 0;
             Forward.Normalize();
 
@@ -72,6 +79,21 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void doLook()
+    {
+        RaycastHit hit;
+
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition); //Creating ray from mouse on screen...
+
+        if(Physics.Raycast(ray,out hit, 1000000)) //Casting out ray and populating our 'hit' value...
+        {
+            Vector3 forward = (transform.position - hit.point) * -1; //Getting the direction between our position and our hit point position...
+            forward.y = 0; //Zeroing out the Y...
+            forward.Normalize(); //Normalize to calculate direction...
+            transform.forward = Vector3.MoveTowards(transform.forward, forward, Time.deltaTime * SmoothDamp); //Move our forward toward the direction between the position...
+            
+        }
+    }
 
     //Combat States...
     public void dodoOutOfCombat()
@@ -83,23 +105,32 @@ public class PlayerController : MonoBehaviour {
     }
     public void doOutOfCombat()
     {
-        MovementInput(DT, IP, Camera.transform);
+        MovementInput(DT, IP, cam.transform);
     }
     public void doCombat()
     {
-
+        if (attacking)
+        {
+            Instantiate(bullet, transform.position, transform.rotation);
+        }
     }
+
 
     // Update is called once per frame
     void Update()
     {
-
+       
         DT = Time.deltaTime;
 
         updateAnim(Anim);
     }
-        private void FixedUpdate()
+
+
+    private void FixedUpdate()
     {
+
+      
+        doLook();
         switch (CurrentState)
         {
             case States.OutOfCOmbatState:

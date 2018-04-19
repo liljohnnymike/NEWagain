@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -239,8 +239,50 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &1058904756
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4466274458783738, guid: 9d114d54db603f1499a1d86fd5a0b4d0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.4440846
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466274458783738, guid: 9d114d54db603f1499a1d86fd5a0b4d0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466274458783738, guid: 9d114d54db603f1499a1d86fd5a0b4d0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -3.5286522
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466274458783738, guid: 9d114d54db603f1499a1d86fd5a0b4d0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466274458783738, guid: 9d114d54db603f1499a1d86fd5a0b4d0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466274458783738, guid: 9d114d54db603f1499a1d86fd5a0b4d0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466274458783738, guid: 9d114d54db603f1499a1d86fd5a0b4d0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466274458783738, guid: 9d114d54db603f1499a1d86fd5a0b4d0, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9d114d54db603f1499a1d86fd5a0b4d0, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1148648522
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,7 +365,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1798245733
 GameObject:
@@ -339,7 +381,7 @@ GameObject:
   - component: {fileID: 1798245738}
   - component: {fileID: 1798245739}
   m_Layer: 0
-  m_Name: Player Capsule
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,7 +451,7 @@ Transform:
   m_Children:
   - {fileID: 2065295033}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1798245738
 Rigidbody:
@@ -424,7 +466,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1798245739
 MonoBehaviour:
@@ -439,8 +481,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Anim: {fileID: 2065295034}
   MovementSpeed: 500
-  Camera: {fileID: 1909941963}
+  SmoothDamp: 10
+  cam: {fileID: 1909941967}
   IP: {x: 0, y: 0, z: 0}
+  bullet: {fileID: 1960189847564670, guid: 9d114d54db603f1499a1d86fd5a0b4d0, type: 2}
+  SetAttackDelay: 0
+  attacking: 0
 --- !u!1 &1909941963
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,13 +570,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1909941963}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: -10}
+  m_LocalRotation: {x: 0.70648944, y: 0, z: 0, w: 0.7077236}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.9, y: 0, z: 0}
 --- !u!114 &1909941969
 MonoBehaviour:
   m_ObjectHideFlags: 0
