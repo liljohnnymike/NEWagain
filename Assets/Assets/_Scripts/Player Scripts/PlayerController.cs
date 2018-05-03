@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
 
     public enum States
     {
@@ -14,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public States CurrentState;
 
     private Rigidbody RB;
-    public Animator Anim;
+    public Animator Anim; 
     public float MovementSpeed = 100;
 
     public bool Sprint;
@@ -25,7 +24,6 @@ public class PlayerController : MonoBehaviour
     public float MaxSprintSpeed;
     public float SmoothDamp = 10;
 
-    public float BulletSpeed = 10;
     public GameObject bullet;
 
     public Vector3 IP; // Movement Input
@@ -37,14 +35,13 @@ public class PlayerController : MonoBehaviour
     private float AttackDelay = 1.0f;
     public float SetAttackDelay = .01f;
     public bool Attacking;
-    // Use this for initialization
-    void Start()
-    {
+	// Use this for initialization
+	void Start () {
 
         RB = GetComponent<Rigidbody>(); //Gets Rigidbody on object
-                                        // anim passed in through editor
-    }
-
+        // anim passed in through editor
+	}
+	
     public void KeyInput()
     {
         IP.x = Input.GetAxisRaw("Horizontal");
@@ -79,14 +76,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+   
     public void doLook() //Rotate our player towards the mouse cursor
     {
         RaycastHit hit;
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition); //Creating Ray from mouse point on screen
 
-        if (Physics.Raycast(ray, out hit, 1000000)) //Casting out a ray and populating our hit value
+        if(Physics.Raycast(ray,out hit, 1000000)) //Casting out a ray and populating our hit value
         {
 
             Vector3 forward = (transform.position - hit.point) * -1; // getting the direction between our postion and our hitpoint position
@@ -94,7 +91,7 @@ public class PlayerController : MonoBehaviour
             forward.Normalize(); // Normalize to calculate direction
 
             transform.forward = Vector3.MoveTowards(transform.forward, forward, Time.deltaTime * SmoothDamp); // move our forward towards the direction between the positions
-
+            
 
         }
 
@@ -118,10 +115,9 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
     }
-
-    public void DoFIre()
+    
+    public void DoFire()
     {
-       
         GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
 
         BulletController TempBC = temp.GetComponent<BulletController>();
@@ -137,20 +133,19 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         AttackDelay -= DT;
-        if (Attacking && AttackDelay <= 0)
+        if(Attacking && AttackDelay <= 0)
         {
-            DoFIre();
+            DoFire();
         }
     }
     // Update is called once per frame
-    void Update()
-    {
+    void Update () {
 
         DT = Time.deltaTime;
         KeyInput();
 
         updateAnim(Anim);
-    }
+	}
 
     private void FixedUpdate()
     {
