@@ -8,6 +8,8 @@ public class HealthComponent : MonoBehaviour {
 
     public float MaxHealth = 100;
 
+    public GameObject ParticlePrefab;
+
 	// Use this for initialization
 	void Start () {
         CurrentHealth = MaxHealth;
@@ -18,12 +20,18 @@ public class HealthComponent : MonoBehaviour {
         CurrentHealth -= DamageAmount;
     }
 
+    public void Die()
+    {
+        GameObject Temp = Instantiate(ParticlePrefab, transform.position, transform.rotation);
+        Destroy(gameObject);
+        Destroy(Temp, .5f); //Destroy after half a second...
+    }
 	// Update is called once per frame
 	void Update () {
 		if(CurrentHealth <= 0)
         {
             gameObject.SetActive(false);
-            Debug.Log("Dead");
+            Die();
         }
 	}
 }

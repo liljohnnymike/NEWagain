@@ -2276,6 +2276,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentHealth: 200
   MaxHealth: 200
+  ParticlePrefab: {fileID: 1382187419544506, guid: b321824b54c81d345b5e2cfc8c9758a4,
+    type: 2}
 --- !u!136 &136691487356805928
 CapsuleCollider:
   m_ObjectHideFlags: 1

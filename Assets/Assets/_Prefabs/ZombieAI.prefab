@@ -1361,11 +1361,11 @@ MonoBehaviour:
   CurrentState: 0
   TargetPoint: {fileID: 1805664428995996, guid: 7b1ee8c1b0eac1944baa7a26032c3b5a,
     type: 2}
-  AttackRange: 2
+  AttackRange: 5
   RB: {fileID: 54512240522322822}
   anim: {fileID: 95883566634601884}
   isAttacking: 0
-  AttackDelay: 2
+  AttackDelay: 1
   SetAttackDelay: 0
   EnemyCount: 0
 --- !u!114 &114429160651289454
@@ -1381,6 +1381,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentHealth: 0
   MaxHealth: 100
+  ParticlePrefab: {fileID: 1382187419544506, guid: b321824b54c81d345b5e2cfc8c9758a4,
+    type: 2}
 --- !u!114 &114673282289112202
 MonoBehaviour:
   m_ObjectHideFlags: 1
