@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114861969803490314}
   - component: {fileID: 114741049753620900}
   m_Layer: 0
-  m_Name: bullet
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1960189847564670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.172855, y: 0.5, z: -2.1661928}
-  m_LocalScale: {x: 0.2869394, y: 1, z: 1.180884}
+  m_LocalPosition: {x: 63.95395, y: 3.4, z: -13.046878}
+  m_LocalScale: {x: 0.49436095, y: 0.6007595, z: 0.9103927}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -107,13 +107,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1960189847564670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1260ce3d55cd1343921e50dd0158771, type: 3}
+  m_Script: {fileID: 11500000, guid: 45dff50a4d30f5d4cb7f5d003478b919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Owner: {fileID: 0}
-  DamageAmount: 10
-  BulletSpeed: 50
-  BulletDelay: 0.2
+  Speed: 0
 --- !u!114 &114861969803490314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -122,10 +119,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1960189847564670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45dff50a4d30f5d4cb7f5d003478b919, type: 3}
+  m_Script: {fileID: 11500000, guid: ad6c38fab0ba5814fa3a14579994f22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 8
+  Owner: {fileID: 0}
+  DamageAmount: 10
+  BulletSpeed: 50
+  BulletDelay: 0.2
 --- !u!135 &135381208229273010
 SphereCollider:
   m_ObjectHideFlags: 1
